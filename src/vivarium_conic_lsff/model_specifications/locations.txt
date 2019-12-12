@@ -9,3 +9,6 @@
 # locations, they may be found in GBD location set 35, the model
 # results location hierarchy.
 
+India
+Nigeria
+Ethiopia
