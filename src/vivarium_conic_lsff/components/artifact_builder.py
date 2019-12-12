@@ -26,8 +26,12 @@ def build_artifact(path, location):
     write_demographic_data(artifact, location)
 
     for disease in lsff_globals.CAUSES_WITH_INCIDENCE:
-        logger.info(f'Writing disease data for "{disease}"')
+        logger.info(f'{location}: Writing disease data for "{disease}"')
         write_disease_data(artifact, location, disease)
+
+    for disease in lsff_globals.CAUSES_NEONATAL:
+        logger.info(f'{location}: Writing neonatal disease data for "{disease}"')
+        write_neonatal_disease_data(artifact, location, disease)
 
 
 def create_new_artifact(path: str, location: str) -> Artifact:
@@ -55,8 +59,11 @@ def write_demographic_data(artifact, location):
     key = 'cause.all_causes.cause_specific_mortality_rate'
     write(artifact, key, load(key))
 
+    key = 'covariate.live_births_by_sex.estimate'
+    write(artifact, key, load(key))
 
-def write_disease_data(artifact, location, disease):
+
+def write_common_disease_data(artifact, location, disease):
     load = get_load(location)
 
     # Metadata
@@ -71,13 +78,27 @@ def write_disease_data(artifact, location, disease):
 
     # Measures for Disease States
     p, dw = load_prev_dw(sequelae, location)
-    write(artifact, f'sequela.{disease}.prevalence', p)
-    write(artifact, f'sequela.{disease}.disability_weight', dw)
-    write(artifact, f'sequela.{disease}.excess_mortality_rate', load(f'cause.{disease}.excess_mortality_rate'))
+    write(artifact, f'cause.{disease}.prevalence', p)
+    write(artifact, f'cause.{disease}.disability_weight', dw)
+    write(artifact, f'cause.{disease}.excess_mortality_rate', load(f'cause.{disease}.excess_mortality_rate'))
+
+
+def write_disease_data(artifact, location, disease):
+    write_common_disease_data(artifact, location, disease)
 
     # Measures for Transitions
+    load = get_load(location)
     key = f'cause.{disease}.incidence_rate'
     assert getattr(causes, disease).incidence_rate_exists
+    write(artifact, key, load(key))
+
+
+def write_neonatal_disease_data(artifact, location, disease):
+    write_common_disease_data(artifact, location, disease)
+
+    # Measures for Transitions
+    load = get_load(location)
+    key = f'cause.{disease}.birth_prevalence'
     write(artifact, key, load(key))
 
 
