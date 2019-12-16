@@ -33,6 +33,8 @@ def build_artifact(path, location):
         logger.info(f'{location}: Writing neonatal disease data for "{disease}"')
         write_neonatal_disease_data(artifact, location, disease)
 
+    logger.info('!!! Done building artifact !!!')
+
 
 def create_new_artifact(path: str, location: str) -> Artifact:
     if Path(path).is_file():
@@ -70,8 +72,10 @@ def write_common_disease_data(artifact, location, disease):
     key = f'cause.{disease}.sequelae'
     sequelae = load(key)
     write(artifact, key, sequelae)
+
     key = f'cause.{disease}.restrictions'
     write(artifact, key, load(key))
+
     # Measures for Disease Model
     key = f'cause.{disease}.cause_specific_mortality_rate'
     write(artifact, key, load(key))
@@ -91,6 +95,8 @@ def write_disease_data(artifact, location, disease):
     key = f'cause.{disease}.incidence_rate'
     assert getattr(causes, disease).incidence_rate_exists
     write(artifact, key, load(key))
+    if disease != lsff_globals.CAUSE_MEASLES:
+        write(artifact, f'cause.{disease}.remission_rate', load(f'cause.{disease}.remission_rate'))
 
 
 def write_neonatal_disease_data(artifact, location, disease):
