@@ -33,6 +33,8 @@ def build_artifact(path, location):
         logger.info(f'{location}: Writing neonatal disease data for "{disease}"')
         write_neonatal_disease_data(artifact, location, disease)
 
+    write_risk_data(artifact, location, lsff_globals.RISK_FACTOR_VITAMIN_A)
+
     logger.info('!!! Done building artifact !!!')
 
 
@@ -106,6 +108,20 @@ def write_neonatal_disease_data(artifact, location, disease):
     load = get_load(location)
     key = f'cause.{disease}.birth_prevalence'
     write(artifact, key, load(key))
+
+
+def write_risk_data(artifact, location, risk):
+    load = get_load(location)
+
+    risk_distribution_type = load(f'risk_factor.{risk}.distribution')
+    write(artifact, f'risk_factor.{risk}.distribution', risk_distribution_type)
+
+    categories = load(f'risk_factor.{risk}.categories')
+    write(artifact, f'risk_factor.{risk}.categories', categories)
+
+    for measure in ['exposure', 'population_attributable_fraction', 'relative_risk']:
+        key = f'risk_factor.{risk}.{measure}'
+        write(artifact, key, load(key))
 
 
 def load_prev_dw(sequela, location):
