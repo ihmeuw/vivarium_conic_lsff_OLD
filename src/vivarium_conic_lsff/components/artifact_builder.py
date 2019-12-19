@@ -35,6 +35,8 @@ def build_artifact(path, location):
 
     write_risk_data(artifact, location, lsff_globals.RISK_FACTOR_VITAMIN_A)
 
+    write_iron_deficiency_data(artifact, location)
+
     logger.info('!!! Done building artifact !!!')
 
 
@@ -111,6 +113,7 @@ def write_neonatal_disease_data(artifact, location, disease):
 
 
 def write_risk_data(artifact, location, risk):
+    logger.info(f'{location}: Writing risk data for "{risk}"')
     load = get_load(location)
 
     risk_distribution_type = load(f'risk_factor.{risk}.distribution')
@@ -122,6 +125,21 @@ def write_risk_data(artifact, location, risk):
     for measure in ['exposure', 'population_attributable_fraction', 'relative_risk']:
         key = f'risk_factor.{risk}.{measure}'
         write(artifact, key, load(key))
+
+
+def write_iron_deficiency_data(artifact, location):
+    logger.info(f'{location}: Writing data for iron deficiency')
+    load = get_load(location)
+
+    for measure in ['exposure', 'exposure_standard_deviation']:
+        key = f'risk_factor.iron_deficiency.{measure}'
+        write(artifact, key, load(key))
+
+    categories_iron_deficiency = load('cause.dietary_iron_deficiency.sequelae')
+    for cat in categories_iron_deficiency:
+        key = f'sequela.{cat}.disability_weight'
+        write(artifact, key, load(key))
+
 
 
 def load_prev_dw(sequela, location):
