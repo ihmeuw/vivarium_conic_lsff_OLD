@@ -1,4 +1,4 @@
-from gbd_mapping import causes
+from gbd_mapping import causes, risk_factors
 
 
 CLUSTER_PROJECT = 'proj_cost_effect_conic'
@@ -13,6 +13,9 @@ CAUSE_NEONATAL_NEURAL_TUBE_DEFECTS = causes.neural_tube_defects.name
 CAUSE_NEONATAL_ENCEPHALOPATHY = causes.neonatal_encephalopathy_due_to_birth_asphyxia_and_trauma.name
 CAUSE_NEONATAL_SEPSIS = causes.neonatal_sepsis_and_other_neonatal_infections.name
 CAUSE_NEONATAL_JAUNDICE = causes.hemolytic_disease_and_other_neonatal_jaundice.name
+
+RISK_FACTOR_VITAMIN_A = risk_factors.vitamin_a_deficiency.name
+
 
 CAUSES_WITH_INCIDENCE = [
     CAUSE_MEASLES,
