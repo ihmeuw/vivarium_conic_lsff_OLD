@@ -62,13 +62,7 @@ def write_disease_data(artifact: Artifact, location: str):
 
 def write_risk_data(artifact, location, risk):
     logger.info(f'Writing risk data for {risk}...')
-
-    meta_data = ['distribution', 'categories']
-    keys = [EntityKey(f'risk_factor.{risk}.{m}') for m in meta_data]
-    getters = {k: partial(loader, k, location, set()) for k in keys}
-    safe_write(artifact, keys, getters)
-
-    measures = ['exposure', 'population_attributable_fraction', 'relative_risk']
+    measures = ['exposure', 'population_attributable_fraction', 'relative_risk', 'distribution', 'categories']
     keys = [EntityKey(f'risk_factor.{risk}.{m}') for m in measures]
     getters = {k: partial(loader, k, location, set()) for k in keys}
     safe_write(artifact, keys, getters)

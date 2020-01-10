@@ -49,6 +49,8 @@ def build_proj_artifact(location, output_dir: str, erase: bool):
 
 
 MODEL_SPEC_DIR = (Path(__file__).parent.parent / 'model_specifications').resolve()
+
+
 @click.command()
 @click.option('-l', '--locations-file',
               type=click.Path(dir_okay=False),
