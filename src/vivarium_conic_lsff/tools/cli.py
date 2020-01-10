@@ -25,7 +25,6 @@ from jinja2 import Template
 from loguru import logger
 from vivarium.framework.utilities import handle_exceptions
 
-# from vivarium_conic_lsff.components import artifact_builder
 from vivarium_conic_lsff.tools import builder
 import vivarium_conic_lsff.globals as lsff_globals
 
@@ -44,7 +43,7 @@ Location = namedtuple('Location', ['proper', 'sanitized'])
               help='Erase the existing artifact. Default is NOT to erase.')
 def build_proj_artifact(location, output_dir: str, erase: bool):
     output_root = Path(output_dir)
-    logger.info(f'Kjell - Building artifact for location "{location}" in: \n\t{output_root}')
+    logger.info(f'Building artifact for location "{location}" in: \n\t{output_root}')
     main = handle_exceptions(builder.build_artifact, logger, with_debugger=False)
     main(location, output_root, erase)
 
