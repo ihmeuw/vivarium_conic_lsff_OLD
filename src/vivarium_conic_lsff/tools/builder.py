@@ -115,7 +115,6 @@ def build_artifact(location: str, output_dir: str, erase: bool):
     write_demographic_data(artifact, location)
     write_covariate_data(artifact, location)
     write_disease_data(artifact, location)
-    # write_alternative_risk_data(artifact, location)
     write_lbwsg_data(artifact, location)
     write_risk_data(artifact, location, lsff_globals.RISK_FACTOR_VITAMIN_A)
     write_iron_deficiency_data(artifact, location)
