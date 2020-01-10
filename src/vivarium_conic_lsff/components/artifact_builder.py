@@ -131,6 +131,9 @@ def write_iron_deficiency_data(artifact, location):
     logger.info(f'{location}: Writing data for iron deficiency')
     load = get_load(location)
 
+    key = 'risk_factor.iron_deficiency.distribution'
+    write(artifact, key, load(key))
+
     for measure in ['exposure', 'exposure_standard_deviation']:
         key = f'risk_factor.iron_deficiency.{measure}'
         write(artifact, key, load(key))
