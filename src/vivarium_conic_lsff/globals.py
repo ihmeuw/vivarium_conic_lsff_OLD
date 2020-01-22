@@ -23,8 +23,8 @@ CAUSE_MEASURES = {
     'neonatal_encephalopathy_due_to_birth_asphyxia_and_trauma': NEONATAL_CAUSE_LIST,
     'hemolytic_disease_and_other_neonatal_jaundice': NEONATAL_CAUSE_LIST,
     'neural_tube_defects': NEONATAL_CAUSE_LIST,
-    #'neonatal_preterm_birth':[c for c in NEONATAL_CAUSE_LIST if c not in ['birth_prevalence', 'prevalence']]
 }
 
+NEONATAL_SEPSIS_IR_MEID=1594
 
 
