@@ -15,14 +15,14 @@ NEONATAL_CAUSE_LIST = ['cause_specific_mortality_rate', 'excess_mortality_rate',
          'birth_prevalence', 'prevalence', 'restrictions']
 
 CAUSE_MEASURES = {
-    'all_causes': ['cause_specific_mortality_rate'],
-    'diarrheal_diseases': DEFAULT_CAUSE_LIST,
-    'lower_respiratory_infections': DEFAULT_CAUSE_LIST,
-    'measles': [c for c in DEFAULT_CAUSE_LIST if c not in ['remission_rate']],
-    'neonatal_sepsis_and_other_neonatal_infections': NEONATAL_CAUSE_LIST,
-    'neonatal_encephalopathy_due_to_birth_asphyxia_and_trauma': NEONATAL_CAUSE_LIST,
-    'hemolytic_disease_and_other_neonatal_jaundice': NEONATAL_CAUSE_LIST,
-    'neural_tube_defects': NEONATAL_CAUSE_LIST,
+    causes.all_causes.name: ['cause_specific_mortality_rate'],
+    causes.diarrheal_diseases.name: DEFAULT_CAUSE_LIST,
+    causes.lower_respiratory_infections.name: DEFAULT_CAUSE_LIST,
+    causes.measles.name: [c for c in DEFAULT_CAUSE_LIST if c not in ['remission_rate']],
+    causes.neonatal_sepsis_and_other_neonatal_infections.name: NEONATAL_CAUSE_LIST,
+    causes.neonatal_encephalopathy_due_to_birth_asphyxia_and_trauma.name: NEONATAL_CAUSE_LIST,
+    causes.hemolytic_disease_and_other_neonatal_jaundice.name: NEONATAL_CAUSE_LIST,
+    causes.neural_tube_defects.name: NEONATAL_CAUSE_LIST,
 }
 
 NEONATAL_SEPSIS_IR_MEID=1594
