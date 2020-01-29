@@ -11,9 +11,9 @@ LOCATIONS_WITH_DATA_PROBLEMS = ['India']
 RISK_FACTOR_VITAMIN_A = risk_factors.vitamin_a_deficiency.name
 
 DEFAULT_CAUSE_LIST = ['cause_specific_mortality_rate', 'excess_mortality_rate', 'disability_weight',
-         'incidence_rate', 'prevalence', 'remission_rate', 'restrictions']
+                      'incidence_rate', 'prevalence', 'remission_rate', 'restrictions']
 NEONATAL_CAUSE_LIST = ['cause_specific_mortality_rate', 'excess_mortality_rate', 'disability_weight',
-         'birth_prevalence', 'prevalence', 'restrictions']
+                       'birth_prevalence', 'prevalence', 'restrictions']
 
 NEONATAL_CAUSES = [
     causes.neonatal_sepsis_and_other_neonatal_infections.name,
@@ -38,9 +38,9 @@ CAUSE_MEASURES = dict(
 TREATMENT_GROUPS = ['treated', 'untreated']
 AGE_GROUPS = ['early_neonatal', 'late_neonatal', 'post_neonatal', '1_to_4']
 YEARS = list(range(2020, 2026))
-SEX = ['male', 'female']
+SEXES = ['male', 'female']
 
-STRATIFICATION_GROUPS = list(itertools.product(YEARS, SEX, AGE_GROUPS, TREATMENT_GROUPS))
+STRATIFICATION_GROUPS = list(itertools.product(YEARS, SEXES, AGE_GROUPS, TREATMENT_GROUPS))
 
 # tracked metrics
 PERSON_TIME = 'person_time'
@@ -123,14 +123,21 @@ STANDARD_COLUMNS = {
     'country': COUNTRY_COLUMN
 }
 
-METRIC_COLUMN_TEMPLATE = '{METRIC}_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}'
-PERSON_TIME_BY_STATE_COLUMN_TEMPLATE = 'person_time_{STATE}_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}'
-YLDS_COLUMN_TEMPLATE = 'ylds_due_to_{CAUSE_OF_DISABILITY}_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}'
-YLLS_COLUMN_TEMPLATE = 'ylls_due_to_{CAUSE_OF_DEATH}_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}'
-DALYS_COLUMN_TEMPLATE = 'dalys_due_to_{CAUSE_OF_DEATH}_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}'
-DEATH_COLUMN_TEMPLATE = 'death_due_to_{CAUSE_OF_DEATH}_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}'
-COUNT_COLUMN_TEMPLATE = '{COUNT_EVENT}_count_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}'
-TRANSITION_COLUMN_TEMPLATE = '{TRANSITION}_event_count_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}'
+METRIC_COLUMN_TEMPLATE = '{METRIC}_sex_{SEX}_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}_{YEAR}'
+PERSON_TIME_BY_STATE_COLUMN_TEMPLATE = ('person_time_{STATE}_sex_{SEX}_in_age_group_{AGE_GROUP}'
+                                        '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
+YLDS_COLUMN_TEMPLATE = ('ylds_due_to_{CAUSE_OF_DISABILITY}_sex_{SEX}_in_age_group_{AGE_GROUP}'
+                        '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
+YLLS_COLUMN_TEMPLATE = ('ylls_due_to_{CAUSE_OF_DEATH}_sex_{SEX}_in_age_group_{AGE_GROUP}'
+                        '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
+DALYS_COLUMN_TEMPLATE = ('dalys_due_to_{CAUSE_OF_DEATH}_sex_{SEX}_in_age_group_{AGE_GROUP}'
+                         '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
+DEATH_COLUMN_TEMPLATE = ('death_due_to_{CAUSE_OF_DEATH}_sex_{SEX}_in_age_group_{AGE_GROUP}'
+                         '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
+COUNT_COLUMN_TEMPLATE = ('{COUNT_EVENT}_count_sex_{SEX}_in_age_group_{AGE_GROUP}'
+                         '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
+TRANSITION_COLUMN_TEMPLATE = ('{TRANSITION}_event_count_sex_{SEX}_in_age_group_{AGE_GROUP}'
+                              '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
 
 COLUMN_TEMPLATES = {
     'metrics': METRIC_COLUMN_TEMPLATE,
@@ -155,6 +162,8 @@ METRICS = [PERSON_TIME, DEATH, YLLS, YLDS, DALYS] + [
 
 TEMPLATE_FIELD_MAP = {
     'TREATMENT_GROUP': TREATMENT_GROUPS,
+    'YEAR': YEARS,
+    'SEX': SEXES,
     'AGE_GROUP': AGE_GROUPS,
     'CAUSE_OF_DISABILITY': CAUSES_OF_DISABILITY,
     'CAUSE_OF_DEATH': CAUSES_OF_DEATH,
@@ -164,7 +173,7 @@ TEMPLATE_FIELD_MAP = {
     'TRANSITION': TRANSITIONS
 }
 
-NEONATAL_SEPSIS_IR_MEID=1594
+NEONATAL_SEPSIS_IR_MEID = 1594
 
 
 def result_columns(kind='all'):
