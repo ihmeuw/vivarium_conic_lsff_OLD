@@ -35,12 +35,12 @@ CAUSE_MEASURES = dict(
     **{neonatal_cause: NEONATAL_CAUSE_LIST for neonatal_cause in NEONATAL_CAUSES},
     **{other_cause: DEFAULT_CAUSE_LIST for other_cause in OTHER_CAUSES if other_cause != causes.measles.name}
 )
-TREATMENT_GROUPS = ['treated', 'untreated']
+
 AGE_GROUPS = ['early_neonatal', 'late_neonatal', 'post_neonatal', '1_to_4']
 YEARS = list(range(2020, 2026))
 SEXES = ['male', 'female']
 
-STRATIFICATION_GROUPS = list(itertools.product(YEARS, SEXES, AGE_GROUPS, TREATMENT_GROUPS))
+STRATIFICATION_GROUPS = list(itertools.product(YEARS, SEXES, AGE_GROUPS))
 
 # tracked metrics
 PERSON_TIME = 'person_time'
@@ -123,21 +123,14 @@ STANDARD_COLUMNS = {
     'country': COUNTRY_COLUMN
 }
 
-METRIC_COLUMN_TEMPLATE = '{METRIC}_sex_{SEX}_in_age_group_{AGE_GROUP}_treatment_group_{TREATMENT_GROUP}_{YEAR}'
-PERSON_TIME_BY_STATE_COLUMN_TEMPLATE = ('person_time_{STATE}_sex_{SEX}_in_age_group_{AGE_GROUP}'
-                                        '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
-YLDS_COLUMN_TEMPLATE = ('ylds_due_to_{CAUSE_OF_DISABILITY}_sex_{SEX}_in_age_group_{AGE_GROUP}'
-                        '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
-YLLS_COLUMN_TEMPLATE = ('ylls_due_to_{CAUSE_OF_DEATH}_sex_{SEX}_in_age_group_{AGE_GROUP}'
-                        '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
-DALYS_COLUMN_TEMPLATE = ('dalys_due_to_{CAUSE_OF_DEATH}_sex_{SEX}_in_age_group_{AGE_GROUP}'
-                         '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
-DEATH_COLUMN_TEMPLATE = ('death_due_to_{CAUSE_OF_DEATH}_sex_{SEX}_in_age_group_{AGE_GROUP}'
-                         '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
-COUNT_COLUMN_TEMPLATE = ('{COUNT_EVENT}_count_sex_{SEX}_in_age_group_{AGE_GROUP}'
-                         '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
-TRANSITION_COLUMN_TEMPLATE = ('{TRANSITION}_event_count_sex_{SEX}_in_age_group_{AGE_GROUP}'
-                              '_treatment_group_{TREATMENT_GROUP}_{YEAR}')
+METRIC_COLUMN_TEMPLATE = '{METRIC}in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
+PERSON_TIME_BY_STATE_COLUMN_TEMPLATE = 'person_time_{STATE}_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
+YLDS_COLUMN_TEMPLATE = 'ylds_due_to_{CAUSE_OF_DISABILITY}_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
+YLLS_COLUMN_TEMPLATE = 'ylls_due_to_{CAUSE_OF_DEATH}_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
+DALYS_COLUMN_TEMPLATE = 'dalys_due_to_{CAUSE_OF_DEATH}_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
+DEATH_COLUMN_TEMPLATE = 'death_due_to_{CAUSE_OF_DEATH}_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
+COUNT_COLUMN_TEMPLATE = '{COUNT_EVENT}_count_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
+TRANSITION_COLUMN_TEMPLATE = '{TRANSITION}_event_count_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
 
 COLUMN_TEMPLATES = {
     'metrics': METRIC_COLUMN_TEMPLATE,
@@ -161,7 +154,6 @@ METRICS = [PERSON_TIME, DEATH, YLLS, YLDS, DALYS] + [
 ]
 
 TEMPLATE_FIELD_MAP = {
-    'TREATMENT_GROUP': TREATMENT_GROUPS,
     'YEAR': YEARS,
     'SEX': SEXES,
     'AGE_GROUP': AGE_GROUPS,
