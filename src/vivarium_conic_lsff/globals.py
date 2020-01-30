@@ -79,7 +79,7 @@ DIARRHEA_TRANSITIONS = [f'{SUSCEPTIBLE_DIARRHEA}_to_{ACTIVE_DIARRHEA}', f'{ACTIV
 SUSCEPTIBLE_LRI = 'susceptible_lower_respiratory_infection'
 ACTIVE_LRI = 'active_lower_respiratory_infection'
 LRI_STATES = [SUSCEPTIBLE_LRI, ACTIVE_LRI]
-LRI_TRANSITIONS = [f'{SUSCEPTIBLE_LRI}_to_{ACTIVE_LRI}' f'{ACTIVE_LRI}_to_{SUSCEPTIBLE_LRI}']
+LRI_TRANSITIONS = [f'{SUSCEPTIBLE_LRI}_to_{ACTIVE_LRI}', f'{ACTIVE_LRI}_to_{SUSCEPTIBLE_LRI}']
 
 SUSCEPTIBLE_MEASLES = 'susceptible_measles'
 ACTIVE_MEASLES = 'active_measles'
@@ -123,7 +123,7 @@ STANDARD_COLUMNS = {
     'country': COUNTRY_COLUMN
 }
 
-METRIC_COLUMN_TEMPLATE = '{METRIC}in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
+METRIC_COLUMN_TEMPLATE = '{METRIC}_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
 PERSON_TIME_BY_STATE_COLUMN_TEMPLATE = 'person_time_{STATE}_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
 YLDS_COLUMN_TEMPLATE = 'ylds_due_to_{CAUSE_OF_DISABILITY}_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
 YLLS_COLUMN_TEMPLATE = 'ylls_due_to_{CAUSE_OF_DEATH}_in_{YEAR}_among_{SEX}_in_age_group_{AGE_GROUP}'
@@ -165,7 +165,9 @@ TEMPLATE_FIELD_MAP = {
     'TRANSITION': TRANSITIONS
 }
 
+
 NEONATAL_SEPSIS_IR_MEID = 1594
+MOCKED_COLUMN_VALUE = -99.0
 
 
 def result_columns(kind='all'):
